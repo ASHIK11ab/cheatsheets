@@ -1,11 +1,11 @@
-# Flask App (Python) - Mongo DB Cheatsheet
+# Python - Mongo DB Cheatsheet
 
 ### Overview
-- This cheatsheet will cover on connecting to Mongo DB from flask app and executing basic CRUD operations from python.
+- This cheatsheet will cover everything from connecting to Mongo DB from python and executing basic CRUD operations.
 
 | &emsp;&emsp;Table of Contents &emsp;&emsp;|
 | --- |
-| 1. [Initial Setup in Flask](#initial-setup) |
+| 1. [Initial Setup in Python](#initial-setup) |
 | 2. [Creating Collections](#creating-collections) |
 | 3. [Inserting Documents](#inserting-documents) |
 | 4. [Selecting Documents](#selecting-documents) |
@@ -25,47 +25,25 @@
 ### Manual Installation
 - Manually install the dependencies by running
 ```bash
-  > pipenv install Flask Flask-PyMongo pymongo[srv]
+  > pipenv install pymongo
 ```
 
 ### Initial setup
-- Since we will be using <kbd>Flask-PyMongo</kbd> we will first create our <kbd>Flask</kbd> application and set up some initial configuration.
-
+- Let's create our mongo client to connect to the Mongo DB database.
 ```py
-  from flask import Flask
+  from pymongo import MongoClient
 
-  app = Flask(__name__)
-  app.config["MONGO_URI"] = "mongodb+srv://<username>:<password>@<uri>/<dbname>"
+  client = MongoClient("mongodb+srv://<username>:<password>@<uri>/<dbname>")
+  db = client.db
 ```
-> Replace `username`, `password`, `uri`, `dbname` with your actual values.
-
-2. Now, lets create our mongo instance and bind it to our Mongo DB database.
-```py
-  from flask_pymongo import PyMongo
-
-  mongo = PyMongo(app)
-```
-> Flask-PyMongo will find the Mongo DB URI from our app's configuration.
-
-3. Now, lets consolidate our initial setup.
-```py
-  from flask import Flask
-  from flask_pymongo import PyMongo
-
-  app = Flask(__name__)
-  app.config["MONGO_URI"] = "mongodb+srv://<username>:<password>@<uri>/<dbname>"
-
-  mongo = PyMongo(app)
-```
+> - Replace `username`, `password`, `uri`, `dbname` with your actual values.
+> - The <kbd>db</kbd> is the reference to the Mongo DB database which we will be using to interact with the database.
 
 ### Creating collections
 1. Now, lets create a collection called <kbd>users</kbd> in Mongo DB using our mongo instance.
-1. The <kbd>db</kbd> object of <kbd>mongo</kbd> instance gives allows us to interact with the database.
 1. Inorder to create a collection we will use the <kbd>db</kbd> object and the collection name.
 1. Ex, <kbd>db.\<collection-name></kbd>
 ```py
-  db = mongo.db
-
   # db.users will return the collection if the collection is present, if not it will create a new collection named `users`.
   users = db.users
 ```
