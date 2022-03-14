@@ -59,7 +59,7 @@
     'gender': 'male'
   }
 ```
-4. For inserting a document use the <kbd>insert_one()<kbd> method on the collection and pass a document.
+4. For inserting a document use the <kbd>insert_one()</kbd> method on the collection and pass a document.
 ```py
   Syntax: db.<collection-name>.insert_one(document)
 ```
@@ -145,7 +145,10 @@
 ### Updating documents
 1. Use the <kbd>update_one()</kbd> method to update a document in a collection.
 1. The <kbd>update_one()</kbd> method takes two parameters. The first is the filter to find the document and the second is the updation values of the document.
-1. Syntax: <kbd>db.\<collection-name>.update_one(\<filter>, \<update-rule>)
+1. Syntax:
+```
+  db.<collection-name>.update_one(<filter>, <update-rule>)
+```
 1. The update rule is a json object with <kbd>$set</kbd> as key and the values as an object.
 1. Lets update the age of the user `Kim` to 25.
 ```py
@@ -162,7 +165,11 @@
 ### Deleting documents
 1. Deleting documents is similar to selecting documents where documents which match the condition are deleted.
 1. Use the <kbd>delete_one()</kbd> method to delete the first matching record.
-1. Syntax: <kbd>db.\<collection-name>.delete_one(\<filter-rule>)
+1. Syntax:
+```
+  db.<collection-name>.delete_one(<filter-rule>)
+```
+
 1. Lets delete the user whose name is `Kim`.
 ```py
   >>> db.users.delete_one({'name': 'Kim'})
